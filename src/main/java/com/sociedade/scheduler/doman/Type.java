@@ -1,5 +1,6 @@
 package com.sociedade.scheduler.doman;
 
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,6 +12,7 @@ import java.time.Duration;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity()
 public class Type extends GenericEntity {
 
     private String name;
@@ -18,5 +20,4 @@ public class Type extends GenericEntity {
     private Duration time;
 
     private Long companyId;
-
 }

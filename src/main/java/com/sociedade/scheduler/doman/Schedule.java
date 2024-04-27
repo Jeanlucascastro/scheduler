@@ -20,5 +20,4 @@ public class Schedule extends GenericEntity {
     private Type type;
 
     private Long companyId;
-
 }
