@@ -1,4 +1,4 @@
-package com.sociedade.scheduler.doman;
+package com.sociedade.scheduler.model;
 
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;

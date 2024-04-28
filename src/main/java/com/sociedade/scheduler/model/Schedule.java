@@ -1,4 +1,4 @@
-package com.sociedade.scheduler.doman;
+package com.sociedade.scheduler.model;
 
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
@@ -24,6 +24,8 @@ public class Schedule extends GenericEntity {
     private Long companyId;
 
     private Long userId;
+
+    private Executor executor;
 
     public void calculateFinalTime() {
         if (initialTime != null && type != null && type.getTime() != null) {

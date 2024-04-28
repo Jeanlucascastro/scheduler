@@ -1,9 +1,9 @@
 package com.sociedade.scheduler.services;
 
-import com.sociedade.scheduler.doman.Schedule;
-import com.sociedade.scheduler.doman.Type;
-import com.sociedade.scheduler.doman.dto.CreateScheduleDTO;
-import com.sociedade.scheduler.doman.dto.UpdateScheduleDTO;
+import com.sociedade.scheduler.model.Schedule;
+import com.sociedade.scheduler.model.Type;
+import com.sociedade.scheduler.model.dto.CreateScheduleDTO;
+import com.sociedade.scheduler.model.dto.UpdateScheduleDTO;
 import com.sociedade.scheduler.repositories.ScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,7 +30,8 @@ public class ScheduleService {
                 null,
                 type,
                 createScheduleDTO.companyId(),
-                createScheduleDTO.userId()
+                createScheduleDTO.userId(),
+                null
         );
         schedule.calculateFinalTime();
         return this.scheduleRepository.save(schedule);

@@ -1,8 +1,8 @@
 package com.sociedade.scheduler.controllers;
 
-import com.sociedade.scheduler.doman.Schedule;
-import com.sociedade.scheduler.doman.dto.CreateScheduleDTO;
-import com.sociedade.scheduler.doman.dto.UpdateScheduleDTO;
+import com.sociedade.scheduler.model.Schedule;
+import com.sociedade.scheduler.model.dto.CreateScheduleDTO;
+import com.sociedade.scheduler.model.dto.UpdateScheduleDTO;
 import com.sociedade.scheduler.services.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

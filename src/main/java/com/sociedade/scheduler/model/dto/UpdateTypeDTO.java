@@ -1,4 +1,4 @@
-package com.sociedade.scheduler.doman.dto;
+package com.sociedade.scheduler.model.dto;
 
 public record UpdateTypeDTO(String name, Long duration) {
 }
