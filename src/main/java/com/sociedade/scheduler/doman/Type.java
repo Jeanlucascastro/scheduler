@@ -20,4 +20,5 @@ public class Type extends GenericEntity {
     private Duration time;
 
     private Long companyId;
+
 }

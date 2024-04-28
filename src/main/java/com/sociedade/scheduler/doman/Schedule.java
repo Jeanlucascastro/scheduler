@@ -1,5 +1,6 @@
 package com.sociedade.scheduler.doman;
 
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity()
 public class Schedule extends GenericEntity {
 
     private LocalDateTime initialTime;
@@ -20,4 +22,14 @@ public class Schedule extends GenericEntity {
     private Type type;
 
     private Long companyId;
+
+    private Long userId;
+
+    public void calculateFinalTime() {
+        if (initialTime != null && type != null && type.getTime() != null) {
+            this.finalTime = initialTime.plus(type.getTime());
+        } else {
+            throw new IllegalArgumentException("Initial time or type time cannot be null");
+        }
+    }
 }
