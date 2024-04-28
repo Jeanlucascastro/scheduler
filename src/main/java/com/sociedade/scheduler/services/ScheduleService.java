@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -20,6 +21,12 @@ public class ScheduleService {
 
     @Autowired
     private TypeService typeService;
+
+    public Boolean checkAvailability(LocalDateTime initialTime, Type type) {
+        LocalDateTime finalTime = initialTime.plus(type.getTime());
+        List<Schedule> schedules = scheduleRepository.findOverlappingSchedules(initialTime, finalTime);
+        return schedules.isEmpty();
+    }
 
     public Schedule saveSchedule(CreateScheduleDTO createScheduleDTO) {
 

@@ -19,7 +19,6 @@ public class ScheduleController {
         this.scheduleService = scheduleService;
     }
 
-
     @PostMapping
     public Schedule saveSchedule(@RequestBody CreateScheduleDTO createScheduleDTO) {
         return scheduleService.saveSchedule(createScheduleDTO);
