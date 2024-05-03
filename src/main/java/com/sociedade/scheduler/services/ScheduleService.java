@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -71,6 +72,11 @@ public class ScheduleService {
 
     public void deleteSchedule(Long id) {
         this.scheduleRepository.deleteById(id);
+    }
+
+
+    public List<Schedule> findByExecutorIdAndInitialTime(Long executorId, LocalDate initialTime) {
+        return scheduleRepository.findByExecutorIdAndInitialTime(executorId, initialTime);
     }
 
 }

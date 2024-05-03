@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @RestController
 @RequestMapping("/schedules")
 public class ScheduleController {
@@ -43,5 +46,12 @@ public class ScheduleController {
     @DeleteMapping("/{id}")
     public void deleteSchedule(@PathVariable Long id) {
         scheduleService.deleteSchedule(id);
+    }
+
+    @GetMapping("/schedule")
+    public List<Schedule> findByExecutorIdAndInitialTime(
+            @RequestParam Long executorId,
+            @RequestParam LocalDate initialTime) {
+        return scheduleService.findByExecutorIdAndInitialTime(executorId, initialTime);
     }
 }
