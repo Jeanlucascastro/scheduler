@@ -7,9 +7,11 @@ import com.sociedade.scheduler.repositories.ExecutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ExecutorService {
 
     @Autowired
@@ -20,7 +22,8 @@ public class ExecutorService {
         Executor executor = new Executor(
                 createExecutorDTO.userId(),
                 createExecutorDTO.name(),
-                createExecutorDTO.avaliability()
+                createExecutorDTO.avaliability(),
+                createExecutorDTO.companyId()
         );
 
         return this.executorRepository.save(executor);

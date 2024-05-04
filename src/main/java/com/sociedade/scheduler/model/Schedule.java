@@ -1,6 +1,8 @@
 package com.sociedade.scheduler.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,12 +21,16 @@ public class Schedule extends GenericEntity {
 
     private LocalDateTime finalTime;
 
+    @ManyToOne
+    @JoinColumn(name = "type_id")
     private Type type;
 
     private Long companyId;
 
     private Long userId;
 
+    @ManyToOne
+    @JoinColumn(name = "executor_id")
     private Executor executor;
 
     public void calculateFinalTime() {

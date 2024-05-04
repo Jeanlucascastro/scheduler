@@ -4,6 +4,7 @@ import com.sociedade.scheduler.model.Executor;
 import com.sociedade.scheduler.model.dto.CreateExecutorDTO;
 import com.sociedade.scheduler.model.dto.UpdateExecutorDTO;
 import com.sociedade.scheduler.services.ExecutorService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/executors")
 public class ExecutorController {
 
+    @Autowired
     private final ExecutorService executorService;
 
     public ExecutorController(ExecutorService executorService) {

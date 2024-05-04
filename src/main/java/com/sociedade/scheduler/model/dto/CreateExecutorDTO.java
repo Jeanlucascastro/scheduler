@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 public record CreateExecutorDTO(
         Long userId,
         String name,
-        Availability avaliability
-
+        Availability avaliability,
+        Long companyId
 ) {
 }

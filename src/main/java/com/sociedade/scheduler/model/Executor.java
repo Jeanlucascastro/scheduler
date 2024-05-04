@@ -23,4 +23,6 @@ public class Executor extends GenericEntity {
     @Enumerated(EnumType.STRING)
     private Availability availability;
 
+    private Long companyId;
+
 }
