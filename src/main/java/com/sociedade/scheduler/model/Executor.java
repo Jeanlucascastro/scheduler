@@ -1,9 +1,8 @@
 package com.sociedade.scheduler.model;
 
 import com.sociedade.scheduler.enuns.Availability;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import com.sociedade.scheduler.model.user.User;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,13 +15,27 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Executor extends GenericEntity {
 
-    private Long userId;
+    @OneToOne
+    @JoinColumn(name = "user_auth_id")
+    private User user;
 
     private String name;
 
     @Enumerated(EnumType.STRING)
     private Availability availability;
 
-    private Long companyId;
+    @ManyToOne
+    @JoinColumn(name = "company_yd")
+    private Company company;
+
+
+    public void setUser(User user) {
+        this.user = user;
+        if (user != null) {
+            this.availability = Availability.AVAILABLE;
+        } else {
+            this.availability = Availability.UNAVAILABLE;
+        }
+    }
 
 }

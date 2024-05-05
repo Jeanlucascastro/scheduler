@@ -1,6 +1,8 @@
 package com.sociedade.scheduler.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,6 +21,8 @@ public class Type extends GenericEntity {
 
     private Duration time;
 
-    private Long companyId;
+    @ManyToOne
+    @JoinColumn(name = "company_yd")
+    private Company company;
 
 }

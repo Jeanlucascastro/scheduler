@@ -5,9 +5,8 @@ import com.sociedade.scheduler.enuns.Availability;
 import java.time.LocalDateTime;
 
 public record CreateExecutorDTO(
-        Long userId,
+        String userId,
         String name,
-        Availability avaliability,
         Long companyId
 ) {
 }
