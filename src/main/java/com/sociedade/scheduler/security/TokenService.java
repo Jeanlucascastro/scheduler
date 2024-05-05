@@ -22,13 +22,17 @@ public class TokenService {
         try{
             Algorithm algorithm = Algorithm.HMAC256(secret);
 
-            String[] userClaims = user.getClaims().toArray(new String[0]);
+            String [] userClaims = null;
+
+            if (user.getClaims() != null) {
+                userClaims = user.getClaims().toArray(new String[0]);
+            }
 
             String token = JWT.create()
-                    .withIssuer("auth-api")
+                    .withIssuer("scheduler")
                     .withSubject(user.getLogin())
                     .withExpiresAt(genExpirationDate())
-                    .withArrayClaim("user_claims", userClaims)
+                    //.withArrayClaim("user_claims", userClaims)
                     .sign(algorithm);
             return token;
         } catch (JWTCreationException exception) {
@@ -40,7 +44,7 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
-                    .withIssuer("auth-api")
+                    .withIssuer("scheduler")
                     .build()
                     .verify(token)
                     .getSubject();
@@ -58,7 +62,7 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String subject = JWT.require(algorithm)
-                    .withIssuer("auth-api")
+                    .withIssuer("scheduler")
                     .build()
                     .verify(token)
                     .getSubject();

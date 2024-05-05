@@ -1,10 +1,12 @@
 package com.sociedade.scheduler.services;
 
+import com.sociedade.scheduler.model.Company;
 import com.sociedade.scheduler.model.Schedule;
 import com.sociedade.scheduler.model.Type;
 import com.sociedade.scheduler.model.dto.CreateScheduleDTO;
 import com.sociedade.scheduler.model.dto.UpdateScheduleDTO;
 import com.sociedade.scheduler.repositories.ScheduleRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,21 +25,26 @@ public class ScheduleService {
     @Autowired
     private TypeService typeService;
 
+    @Autowired
+    private CompanyService companyService;
+
     public Boolean checkAvailability(LocalDateTime initialTime, Type type) {
         LocalDateTime finalTime = initialTime.plus(type.getTime());
         List<Schedule> schedules = scheduleRepository.findOverlappingSchedules(initialTime, finalTime);
         return schedules.isEmpty();
     }
 
-    public Schedule saveSchedule(CreateScheduleDTO createScheduleDTO) {
+    public Schedule saveSchedule(@Valid CreateScheduleDTO createScheduleDTO) {
 
         Type type = this.typeService.getTypeById(createScheduleDTO.typeId());
+
+        Company company = this.companyService.findById(createScheduleDTO.companyId());
 
         Schedule schedule = new Schedule(
                 createScheduleDTO.initialTime(),
                 null,
                 type,
-                createScheduleDTO.companyId(),
+                company,
                 createScheduleDTO.userId(),
                 null
         );

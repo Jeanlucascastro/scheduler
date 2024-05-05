@@ -1,6 +1,7 @@
 package com.sociedade.scheduler.services;
 
 
+import com.sociedade.scheduler.model.Company;
 import com.sociedade.scheduler.model.Type;
 import com.sociedade.scheduler.model.dto.CreateTypeDTO;
 import com.sociedade.scheduler.model.dto.UpdateTypeDTO;
@@ -19,11 +20,17 @@ public class TypeService {
     @Autowired
     private TypeRepository typeRepository;
 
+    @Autowired
+    private CompanyService companyService;
+
     public Type saveType(CreateTypeDTO typeDTO) {
+
+        Company company = this.companyService.findById(typeDTO.companyId());
+
         Type type = new Type(
          typeDTO.name(),
                 Duration.ofMinutes(typeDTO.duration()),
-                typeDTO.companyId()
+                company
         );
         return this.typeRepository.save(type);
     }
