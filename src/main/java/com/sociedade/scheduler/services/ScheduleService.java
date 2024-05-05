@@ -45,7 +45,6 @@ public class ScheduleService {
                 null,
                 type,
                 company,
-                createScheduleDTO.userId(),
                 null
         );
         schedule.calculateFinalTime();

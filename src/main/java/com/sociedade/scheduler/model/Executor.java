@@ -1,5 +1,6 @@
 package com.sociedade.scheduler.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sociedade.scheduler.enuns.Availability;
 import com.sociedade.scheduler.model.user.User;
 import jakarta.persistence.*;
@@ -17,6 +18,7 @@ public class Executor extends GenericEntity {
 
     @OneToOne
     @JoinColumn(name = "user_auth_id")
+    @JsonIgnore
     private User user;
 
     private String name;

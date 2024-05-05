@@ -29,8 +29,6 @@ public class Schedule extends GenericEntity {
     @JoinColumn(name = "company_yd")
     private Company company;
 
-    private Long userId;
-
     @ManyToOne
     @JoinColumn(name = "executor_id")
     private Executor executor;

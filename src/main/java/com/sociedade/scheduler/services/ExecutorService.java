@@ -1,5 +1,6 @@
 package com.sociedade.scheduler.services;
 
+import com.sociedade.scheduler.enuns.Availability;
 import com.sociedade.scheduler.model.Company;
 import com.sociedade.scheduler.model.Executor;
 import com.sociedade.scheduler.model.dto.CreateExecutorDTO;
@@ -40,6 +41,8 @@ public class ExecutorService {
         if (createExecutorDTO.userId() != null) {
             Optional<User> user = this.authorizationService.findById(createExecutorDTO.userId());
             user.ifPresent(executor::setUser);
+        } else {
+            executor.setAvailability(Availability.UNAVAILABLE);
         }
 
 
