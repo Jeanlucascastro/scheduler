@@ -18,7 +18,12 @@ public class Animal extends GenericEntity {
 
     private Long age;
 
+    private Long weight;
+
+    private Long size;
+
     private AnimalType animalType;
 
+    private String note;
 
 }
