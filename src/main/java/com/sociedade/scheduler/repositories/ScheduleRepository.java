@@ -1,6 +1,7 @@
 package com.sociedade.scheduler.repositories;
 
 import com.sociedade.scheduler.model.Schedule;
+import com.sociedade.scheduler.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -20,6 +21,8 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
 
     List<Schedule> findByExecutorIdAndInitialTime(Long executorId, LocalDate initialTime);
+
+    List<Schedule> findByUser(User user);
 
 }
 

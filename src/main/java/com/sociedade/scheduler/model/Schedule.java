@@ -1,8 +1,11 @@
 package com.sociedade.scheduler.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sociedade.scheduler.model.user.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -32,6 +35,11 @@ public class Schedule extends GenericEntity {
     @ManyToOne
     @JoinColumn(name = "executor_id")
     private Executor executor;
+
+    @OneToOne
+    @JoinColumn(name = "user_auth_id")
+    @JsonIgnore
+    private User user;
 
     public void calculateFinalTime() {
         if (initialTime != null && type != null && type.getTime() != null) {

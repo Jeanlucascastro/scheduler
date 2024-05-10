@@ -96,4 +96,5 @@ public class CompanyController {
         List<User> users = this.companyService.getUsersByCompanyId(id);
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
+
 }

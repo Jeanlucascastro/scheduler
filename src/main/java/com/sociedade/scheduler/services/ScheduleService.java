@@ -5,6 +5,7 @@ import com.sociedade.scheduler.model.Schedule;
 import com.sociedade.scheduler.model.Type;
 import com.sociedade.scheduler.model.dto.CreateScheduleDTO;
 import com.sociedade.scheduler.model.dto.UpdateScheduleDTO;
+import com.sociedade.scheduler.model.user.User;
 import com.sociedade.scheduler.repositories.ScheduleRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,7 @@ public class ScheduleService {
                 null,
                 type,
                 company,
+                null,
                 null
         );
         schedule.calculateFinalTime();
@@ -85,4 +87,7 @@ public class ScheduleService {
         return scheduleRepository.findByExecutorIdAndInitialTime(executorId, initialTime);
     }
 
+    public List<Schedule> findScheduleByUser(User user) {
+        return scheduleRepository.findByUser(user);
+    }
 }

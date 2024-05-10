@@ -3,9 +3,11 @@ package com.sociedade.scheduler.controllers;
 import com.sociedade.scheduler.model.Schedule;
 import com.sociedade.scheduler.model.dto.CreateScheduleDTO;
 import com.sociedade.scheduler.model.dto.UpdateScheduleDTO;
+import com.sociedade.scheduler.model.user.User;
 import com.sociedade.scheduler.services.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -53,5 +55,10 @@ public class ScheduleController {
             @RequestParam Long executorId,
             @RequestParam LocalDate initialTime) {
         return scheduleService.findByExecutorIdAndInitialTime(executorId, initialTime);
+    }
+
+    @GetMapping("/by-user")
+    public List<Schedule> getScheduleByUser(@AuthenticationPrincipal User user) {
+        return scheduleService.findScheduleByUser(user);
     }
 }
