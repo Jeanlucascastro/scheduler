@@ -44,8 +44,10 @@ public class ScheduleService {
         Schedule schedule = new Schedule(
                 createScheduleDTO.initialTime(),
                 null,
+                createScheduleDTO.animalName(),
                 type,
                 company,
+                null,
                 null,
                 null
         );

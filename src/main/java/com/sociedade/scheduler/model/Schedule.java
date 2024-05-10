@@ -24,6 +24,8 @@ public class Schedule extends GenericEntity {
 
     private LocalDateTime finalTime;
 
+    private String animalName;
+
     @ManyToOne
     @JoinColumn(name = "type_id")
     private Type type;
@@ -41,11 +43,20 @@ public class Schedule extends GenericEntity {
     @JsonIgnore
     private User user;
 
+    @OneToOne
+    @JoinColumn(name = "animal_id")
+    private Animal animal;
+
     public void calculateFinalTime() {
         if (initialTime != null && type != null && type.getTime() != null) {
             this.finalTime = initialTime.plus(type.getTime());
         } else {
             throw new IllegalArgumentException("Initial time or type time cannot be null");
         }
+    }
+
+    public void addAnimal(Animal animal) {
+        this.animal = animal;
+        this.animalName = animal.getName();
     }
 }
