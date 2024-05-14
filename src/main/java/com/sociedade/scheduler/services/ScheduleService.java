@@ -1,5 +1,6 @@
 package com.sociedade.scheduler.services;
 
+import com.sociedade.scheduler.model.Animal;
 import com.sociedade.scheduler.model.Company;
 import com.sociedade.scheduler.model.Schedule;
 import com.sociedade.scheduler.model.Type;
@@ -29,6 +30,7 @@ public class ScheduleService {
     @Autowired
     private CompanyService companyService;
 
+
     public Boolean checkAvailability(LocalDateTime initialTime, Type type) {
         LocalDateTime finalTime = initialTime.plus(type.getTime());
         List<Schedule> schedules = scheduleRepository.findOverlappingSchedules(initialTime, finalTime);
@@ -53,6 +55,7 @@ public class ScheduleService {
                 createScheduleDTO.note()
         );
         schedule.calculateFinalTime();
+
         return this.scheduleRepository.save(schedule);
     }
 

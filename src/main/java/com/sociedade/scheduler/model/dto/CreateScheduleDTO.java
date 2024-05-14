@@ -7,6 +7,7 @@ public record CreateScheduleDTO(
         Long typeId,
         Long companyId,
         String animalName,
-        String note
+        String note,
+        Long animalId
 ) {
 }
