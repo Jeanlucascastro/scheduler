@@ -117,7 +117,6 @@ public class AuthenticationController {
     @GetMapping(value = "/validate")
     public ResponseEntity<Boolean>validateToken(
             @RequestHeader(value = "token") String token) {
-        System.out.println("token " + token);
         return ResponseEntity.ok(this.authService.validateToken(token));
     }
 
@@ -125,7 +124,6 @@ public class AuthenticationController {
     public ResponseEntity<Boolean>validateUserToken(
             @PathVariable(value = "id") String id,
             @RequestHeader(value = "token") String token) {
-        System.out.println("token " + token);
         return ResponseEntity.ok(this.authService.validateUserToken(id, token));
     }
 }

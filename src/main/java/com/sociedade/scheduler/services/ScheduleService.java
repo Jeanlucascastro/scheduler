@@ -49,7 +49,8 @@ public class ScheduleService {
                 company,
                 null,
                 null,
-                null
+                null,
+                createScheduleDTO.note()
         );
         schedule.calculateFinalTime();
         return this.scheduleRepository.save(schedule);
@@ -75,6 +76,7 @@ public class ScheduleService {
             Type type = this.typeService.getTypeById(updatedSchedule.typeId());
             existingSchedule.setType(type);
             existingSchedule.calculateFinalTime();
+            existingSchedule.setNote(updatedSchedule.note());
             return this.scheduleRepository.save(existingSchedule);
         }
         return null;

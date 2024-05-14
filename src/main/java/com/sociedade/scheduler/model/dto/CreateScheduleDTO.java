@@ -6,6 +6,7 @@ public record CreateScheduleDTO(
         LocalDateTime initialTime,
         Long typeId,
         Long companyId,
-        String animalName
+        String animalName,
+        String note
 ) {
 }
