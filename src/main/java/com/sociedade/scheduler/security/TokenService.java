@@ -32,7 +32,7 @@ public class TokenService {
                     .withIssuer("scheduler")
                     .withSubject(user.getLogin())
                     .withExpiresAt(genExpirationDate())
-                    //.withArrayClaim("user_claims", userClaims)
+                    .withArrayClaim("user_claims", userClaims)
                     .sign(algorithm);
             return token;
         } catch (JWTCreationException exception) {

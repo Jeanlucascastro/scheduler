@@ -37,15 +37,16 @@ public class AnimalController {
 
     @GetMapping
     public ResponseEntity<?> getAllAnimals(
+            @AuthenticationPrincipal User user,
             @RequestParam(name = "page", defaultValue = "0") int page,
             @RequestParam(name = "size", defaultValue = "10") int size,
             @RequestParam(name = "paginated", defaultValue = "true") boolean paginated
     ) {
         if (paginated) {
-            Page<Animal> AnimalsPage = animalService.getAllAnimals(page, size);
+            Page<Animal> AnimalsPage = animalService.getAllAnimals(user, page, size);
             return ResponseEntity.ok(AnimalsPage);
         } else {
-            return ResponseEntity.ok(animalService.getAllAnimals());
+            return ResponseEntity.ok(animalService.getAllAnimals(user));
         }
     }
 

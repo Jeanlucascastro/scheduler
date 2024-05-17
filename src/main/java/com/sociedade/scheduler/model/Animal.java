@@ -34,7 +34,7 @@ public class Animal extends GenericEntity {
     @Column
     private String note;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_auth_id")
     @JsonIgnore
     private User user;

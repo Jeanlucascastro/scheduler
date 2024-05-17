@@ -46,13 +46,13 @@ public class AnimalService {
         return this.AnimalRepository.findById(id).orElse(null);
     }
 
-    public Page<Animal> getAllAnimals(int page, int size) {
+    public Page<Animal> getAllAnimals(User user, int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
-        return AnimalRepository.findAll(pageRequest);
+        return AnimalRepository.findByUser(user, pageRequest);
     }
 
-    public List<Animal> getAllAnimals() {
-        return AnimalRepository.findAll();
+    public List<Animal> getAllAnimals(User user) {
+        return AnimalRepository.findByUser(user);
     }
 
     public Animal updateAnimal(Long id, UpdateAnimalDTO updatedAnimal) {
