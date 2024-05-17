@@ -25,8 +25,8 @@ public class ScheduleController {
     }
 
     @PostMapping
-    public Schedule saveSchedule(@RequestBody CreateScheduleDTO createScheduleDTO) {
-        return scheduleService.saveSchedule(createScheduleDTO);
+    public Schedule saveSchedule(@RequestBody CreateScheduleDTO createScheduleDTO, @AuthenticationPrincipal User user) {
+        return scheduleService.saveSchedule(createScheduleDTO, user);
     }
 
     @GetMapping("/{id}")

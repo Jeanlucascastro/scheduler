@@ -37,8 +37,8 @@ public class ScheduleService {
         return schedules.isEmpty();
     }
 
-    public Schedule saveSchedule(@Valid CreateScheduleDTO createScheduleDTO) {
-
+    public Schedule saveSchedule(@Valid CreateScheduleDTO createScheduleDTO, User user) {
+        System.out.println("user " + user);
         Type type = this.typeService.getTypeById(createScheduleDTO.typeId());
 
         Company company = this.companyService.findById(createScheduleDTO.companyId());
@@ -50,7 +50,7 @@ public class ScheduleService {
                 type,
                 company,
                 null,
-                null,
+                user,
                 null,
                 createScheduleDTO.note()
         );

@@ -35,7 +35,7 @@ public class Schedule extends GenericEntity {
     @JoinColumn(name = "executor_id")
     private Executor executor;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_auth_id")
     @JsonIgnore
     private User user;
