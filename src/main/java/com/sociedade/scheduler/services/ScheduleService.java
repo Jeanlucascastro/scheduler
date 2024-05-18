@@ -1,6 +1,5 @@
 package com.sociedade.scheduler.services;
 
-import com.sociedade.scheduler.model.Animal;
 import com.sociedade.scheduler.model.Company;
 import com.sociedade.scheduler.model.Schedule;
 import com.sociedade.scheduler.model.Type;
