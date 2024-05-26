@@ -35,6 +35,7 @@ public class GenericEntity implements Serializable {
     @PrePersist
     private void fillDate() {
         this.setDateCreate(LocalDateTime.now());
+        this.setDeleted(false);
     }
 
     @PreUpdate

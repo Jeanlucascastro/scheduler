@@ -59,6 +59,7 @@ public class ScheduleController {
 
     @GetMapping("/by-user")
     public List<Schedule> getScheduleByUser(@AuthenticationPrincipal User user) {
+        System.out.println("iuser " + user);
         return scheduleService.findScheduleByUser(user);
     }
 }

@@ -112,6 +112,8 @@ public class ScheduleService {
 
     public List<Schedule> findScheduleByUser(User user) {
         LocalDateTime today = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0);
-        return scheduleRepository.findByUserAndInitialTimeAfter(user, today);
+        System.out.println("todao" + today);
+       // return scheduleRepository.findByUserAndInitialTimeAfter(user, today);
+        return scheduleRepository.findAll();
     }
 }
