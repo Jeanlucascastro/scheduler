@@ -1,5 +1,6 @@
 package com.sociedade.scheduler.services;
 
+import com.sociedade.scheduler.model.Animal;
 import com.sociedade.scheduler.model.Company;
 import com.sociedade.scheduler.model.Schedule;
 import com.sociedade.scheduler.model.Type;
@@ -31,6 +32,9 @@ public class ScheduleService {
     @Autowired
     private CompanyService companyService;
 
+    @Autowired
+    private AnimalService animalServic;
+
 
     public Boolean checkAvailability(LocalDateTime initialTime, Type type) {
         LocalDateTime finalTime = initialTime.plus(type.getTime());
@@ -56,6 +60,10 @@ public class ScheduleService {
                 createScheduleDTO.note()
         );
         schedule.calculateFinalTime();
+
+        Optional<Animal> animal = Optional.ofNullable(this.animalServic.getAnimalById(createScheduleDTO.animalId()));
+
+        animal.ifPresent(schedule::setAnimal);
 
         return this.scheduleRepository.save(schedule);
     }

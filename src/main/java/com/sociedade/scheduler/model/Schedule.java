@@ -40,7 +40,7 @@ public class Schedule extends GenericEntity {
     @JsonIgnore
     private User user;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "animal_id")
     private Animal animal;
 
