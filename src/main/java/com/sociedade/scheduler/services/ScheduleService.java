@@ -89,6 +89,12 @@ public class ScheduleService {
             existingSchedule.setType(type);
             existingSchedule.calculateFinalTime();
             existingSchedule.setNote(updatedSchedule.note());
+
+            if (updatedSchedule.animalId() != null) {
+                Animal animal = this.animalServic.getAnimalById(updatedSchedule.animalId());
+                existingSchedule.setAnimal(animal);
+                existingSchedule.setAnimalName(animal.getName());
+            }
             return this.scheduleRepository.save(existingSchedule);
         }
         return null;
