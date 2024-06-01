@@ -1,9 +1,6 @@
 package com.sociedade.scheduler.services;
 
-import com.sociedade.scheduler.model.Animal;
-import com.sociedade.scheduler.model.Company;
-import com.sociedade.scheduler.model.Schedule;
-import com.sociedade.scheduler.model.Type;
+import com.sociedade.scheduler.model.*;
 import com.sociedade.scheduler.model.dto.CreateScheduleDTO;
 import com.sociedade.scheduler.model.dto.UpdateScheduleDTO;
 import com.sociedade.scheduler.model.user.User;
@@ -17,8 +14,11 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ScheduleService {
@@ -122,4 +122,43 @@ public class ScheduleService {
        // return scheduleRepository.findByUserAndInitialTimeAfter(user, today);
         return scheduleRepository.findAll();
     }
+
+    public List<TimeSlot> getAvailableSlots(Long companyId, LocalDate date) {
+        LocalDateTime startOfDay = date.atTime(8, 0);
+        LocalDateTime endOfDay = date.atTime(18, 0);
+
+        List<Schedule> schedules = scheduleRepository.findByCompanyIdAndInitialTimeBetween(companyId, startOfDay, endOfDay);
+
+        List<TimeSlot> allSlots = generateAllSlots();
+        List<TimeSlot> occupiedSlots = schedules.stream()
+                .flatMap(schedule -> generateOccupiedSlots(schedule).stream())
+                .collect(Collectors.toList());
+
+        allSlots.removeAll(occupiedSlots);
+
+        return allSlots;
+    }
+
+    private List<TimeSlot> generateAllSlots() {
+        List<TimeSlot> slots = new ArrayList<>();
+        LocalTime time = LocalTime.of(8, 0);
+        int value = 0;
+        while (!time.isAfter(LocalTime.of(18, 0))) {
+            slots.add(new TimeSlot(time.toString(), value++));
+            time = time.plusMinutes(15);
+        }
+        return slots;
+    }
+
+    private List<TimeSlot> generateOccupiedSlots(Schedule schedule) {
+        List<TimeSlot> slots = new ArrayList<>();
+        LocalDateTime start = schedule.getInitialTime();
+        LocalDateTime end = schedule.getFinalTime();
+        while (start.isBefore(end)) {
+            slots.add(new TimeSlot(start.toLocalTime().toString(), 0)); // Value is not used in comparison
+            start = start.plusMinutes(15);
+        }
+        return slots;
+    }
+
 }

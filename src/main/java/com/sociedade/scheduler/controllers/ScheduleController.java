@@ -1,6 +1,7 @@
 package com.sociedade.scheduler.controllers;
 
 import com.sociedade.scheduler.model.Schedule;
+import com.sociedade.scheduler.model.TimeSlot;
 import com.sociedade.scheduler.model.dto.CreateScheduleDTO;
 import com.sociedade.scheduler.model.dto.UpdateScheduleDTO;
 import com.sociedade.scheduler.model.user.User;
@@ -61,5 +62,12 @@ public class ScheduleController {
     public List<Schedule> getScheduleByUser(@AuthenticationPrincipal User user) {
         System.out.println("iuser " + user);
         return scheduleService.findScheduleByUser(user);
+    }
+
+
+    @GetMapping("/available-slots")
+    public List<TimeSlot> getAvailableSlots(@RequestParam("companyId") Long companyId, @RequestParam("date") String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        return scheduleService.getAvailableSlots(companyId, localDate);
     }
 }

@@ -24,6 +24,8 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
     List<Schedule> findByUserAndInitialTimeAfter(User user, LocalDateTime initialTime);
 
+    List<Schedule> findByCompanyIdAndInitialTimeBetween(Long companyId, LocalDateTime start, LocalDateTime end);
+
 
 }
 
