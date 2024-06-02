@@ -119,8 +119,8 @@ public class ScheduleService {
     public List<Schedule> findScheduleByUser(User user) {
         LocalDateTime today = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0);
         System.out.println("todao" + today);
-       // return scheduleRepository.findByUserAndInitialTimeAfter(user, today);
-        return scheduleRepository.findAll();
+        return scheduleRepository.findByUserAndInitialTimeAfter(user, today);
+        // return scheduleRepository.findAll();
     }
 
     public List<TimeSlot> getAvailableSlots(Long companyId, LocalDate date) {
