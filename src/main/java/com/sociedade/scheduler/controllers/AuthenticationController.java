@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("auth")
@@ -43,7 +44,11 @@ public class AuthenticationController {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
         User user = (User) this.repository.findByLogin(data.login());
-        UserDTO userDTO = new UserDTO(user.getId(), user.getLogin(), user.getEmail(), user.getUsername());
+        List<Long> listCompanies = user.getCompanies()
+                .stream()
+                .map(Company::getId)
+                .collect(Collectors.toList());
+        UserDTO userDTO = new UserDTO(user.getId(), user.getLogin(), user.getEmail(), user.getUsername(), listCompanies);
 
         boolean isAdmin = false;
 
@@ -73,7 +78,8 @@ public class AuthenticationController {
                 save.getId(),
                 save.getLogin(),
                 save.getEmail(),
-                save.getUsername()
+                save.getUsername(),
+                null
         );
         return ResponseEntity.ok().body(userCreated);
     }
