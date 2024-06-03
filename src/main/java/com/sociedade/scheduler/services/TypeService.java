@@ -30,7 +30,8 @@ public class TypeService {
         Type type = new Type(
          typeDTO.name(),
                 Duration.ofMinutes(typeDTO.duration()),
-                company
+                company,
+                typeDTO.price()
         );
         return this.typeRepository.save(type);
     }
@@ -53,6 +54,7 @@ public class TypeService {
         if (existingType != null) {
             existingType.setName(updatedType.name());
             existingType.setTime(Duration.ofMinutes(updatedType.duration()));
+            existingType.setPrice(updatedType.price());
             return this.typeRepository.save(existingType);
         }
         return null;
